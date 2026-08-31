@@ -1,19 +1,23 @@
-/**
- * ============================================================================
- * 🎓 EVALUACIÓN DIAGNÓSTICA — BLOQUE C: JAVASCRIPT & DOM (CE3)
- * ============================================================================
- * 
- * 📌 REQUERIMIENTOS:
- * C2. Declara variables usando exclusivamente 'let' y 'const' (NO usar 'var').
- * C3. Crea al menos una función nombrada (ej: function generarSaludo(...) { ... }).
- * C4. Selecciona un elemento del DOM con querySelector() o querySelectorAll()
- *     y modifica su contenido (.textContent o .innerHTML) o estilo.
- * C5. Agrega interactividad escuchando eventos con addEventListener()
- *     (por ejemplo al hacer click en #btn-saludar o #btn-limpiar).
- */
+const inputNombre = document.querySelector('#input-nombre');
+const btnSaludar = document.querySelector('#btn-saludar');
+const btnLimpiar = document.querySelector('#btn-limpiar');
+const mensajeResultado = document.querySelector('#mensaje-resultado');
 
-// TODO: C2. Selecciona los elementos del DOM necesarios con const
+function generarSaludo() {
+  const nombre = inputNombre.value.trim();
 
-// TODO: C3. Declara una función nombrada para procesar el saludo
+  if (nombre === '') {
+    mensajeResultado.textContent = 'Por favor, escribe tu nombre.';
+    return;
+  }
 
-// TODO: C4 y C5. Agrega los eventos addEventListener para actualizar la pantalla
+  mensajeResultado.textContent = `¡Hola ${nombre}! Bienvenido(a) a la UETS.`;
+}
+
+btnSaludar.addEventListener('click', generarSaludo);
+
+btnLimpiar.addEventListener('click', () => {
+  inputNombre.value = '';
+  mensajeResultado.textContent = 'Esperando interacción...';
+  inputNombre.focus();
+});
