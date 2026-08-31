@@ -1,12 +1,16 @@
 public class Ejercicio5 {
-
-    // TODO: Define la función estática calcularPromedio(double a, double b)
-
+    // DID: Define la función estática calcularPromedio(double a, double b)
     public static void main(String[] args) {
-        // TODO: Prueba la función calcularPromedio
+        // DID: Prueba la función calcularPromedio
+        
+        // DID: Instancia la clase Estudiante y llama a su método mostrarFicha()
+    }
+    double calcularPromedio(double a, double b)
+    {
+        double prom;
+        return prom;
 
-        // TODO: Instancia la clase Estudiante y llama a su método mostrarFicha()
     }
 }
 
-// TODO: Crea aquí la clase Estudiante con sus atributos, constructor y métodos
+// DID: Crea aquí la clase Estudiante con sus atributos, constructor y métodos
