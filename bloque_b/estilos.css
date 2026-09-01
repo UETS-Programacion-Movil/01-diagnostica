@@ -9,4 +9,19 @@
  * 3. Aplica un layout moderno usando Flexbox (display: flex) o CSS Grid (display: grid).
  */
 
-/* TODO: Escribe aquí tus reglas de estilos CSS */
+#principal {
+  background-color: #2e3440;
+  color: #8fbcbb;
+  padding: 1rem;
+}
+
+.contenedor {
+  display: flex;
+  margin: 1.5rem 0;
+  border: 2px solid #434c5e;
+}
+
+.tarjeta {
+  font-family: sans-serif;
+  padding: 1rem;
+}
