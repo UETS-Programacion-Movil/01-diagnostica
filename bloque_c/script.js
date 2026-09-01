@@ -12,8 +12,32 @@
  *     (por ejemplo al hacer click en #btn-saludar o #btn-limpiar).
  */
 
-// TODO: C2. Selecciona los elementos del DOM necesarios con const
+const inputNombre = document.querySelector('#input-nombre');
+const btnSaludar = document.querySelector('#btn-saludar');
+const btnLimpiar = document.querySelector('#btn-limpiar');
+const mensajeResultado = document.querySelector('#mensaje-resultado');
 
-// TODO: C3. Declara una función nombrada para procesar el saludo
+function saludarEstudiante(nombre) {
+  return `¡Hola, ${nombre}! Bienvenido a Programación Móvil.`;
+}
 
-// TODO: C4 y C5. Agrega los eventos addEventListener para actualizar la pantalla
+if (btnSaludar && inputNombre && mensajeResultado) {
+  btnSaludar.addEventListener('click', () => {
+    const nombre = inputNombre.value.trim();
+    if (nombre) {
+      mensajeResultado.textContent = saludarEstudiante(nombre);
+      mensajeResultado.style.color = '#15803D';
+    } else {
+      mensajeResultado.textContent = 'Por favor ingresa tu nombre.';
+      mensajeResultado.style.color = '#B91C1C';
+    }
+  });
+}
+
+if (btnLimpiar && inputNombre && mensajeResultado) {
+  btnLimpiar.addEventListener('click', () => {
+    inputNombre.value = '';
+    mensajeResultado.textContent = 'Esperando interacción...';
+    mensajeResultado.style.color = '#000';
+  });
+}
