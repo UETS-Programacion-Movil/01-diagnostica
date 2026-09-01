@@ -1,8 +1,14 @@
 public class Ejercicio1 {
     public static void main(String[] args) {
-        // TODO: Declara aquí tus variables y asígnales valores
+        int entero = 42;
+        String texto = "Hola UETS";
+        boolean activo = true;
+        double decimal = 9.99;
 
-        // TODO: Muestra los valores por consola
+        System.out.println(entero);
+        System.out.println(texto);
+        System.out.println(activo);
+        System.out.println(decimal);
         
     }
 }
