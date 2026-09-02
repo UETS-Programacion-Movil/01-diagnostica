@@ -1,8 +1,14 @@
 public class Ejercicio4 {
     public static void main(String[] args) {
-        // TODO: Imprimir números del 1 al 20 usando bucle 'for'
+        int[] numeros = {10, 20, 30, 40, 50};
+        int suma = 0;
 
-        // TODO: Imprimir números del 20 al 1 usando bucle 'while'
+        for (int num : numeros) {
+            suma += num;
+        }
 
+        double promedio = (double) suma / numeros.length;
+        System.out.println("Suma total: " + suma);
+        System.out.println("Promedio: " + promedio);
     }
 }
