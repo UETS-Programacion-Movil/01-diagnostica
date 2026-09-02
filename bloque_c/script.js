@@ -1,19 +1,36 @@
-/**
- * ============================================================================
- * 🎓 EVALUACIÓN DIAGNÓSTICA — BLOQUE C: JAVASCRIPT & DOM (CE3)
- * ============================================================================
- * 
- * 📌 REQUERIMIENTOS:
- * C2. Declara variables usando exclusivamente 'let' y 'const' (NO usar 'var').
- * C3. Crea al menos una función nombrada (ej: function generarSaludo(...) { ... }).
- * C4. Selecciona un elemento del DOM con querySelector() o querySelectorAll()
- *     y modifica su contenido (.textContent o .innerHTML) o estilo.
- * C5. Agrega interactividad escuchando eventos con addEventListener()
- *     (por ejemplo al hacer click en #btn-saludar o #btn-limpiar).
- */
 
-// TODO: C2. Selecciona los elementos del DOM necesarios con const
+const inputNombre = document.querySelector('#input-nombre');
+const btnSaludar = document.querySelector('#btn-saludar');
+const btnLimpiar = document.querySelector('#btn-limpiar');
+const mensajeResultado = document.querySelector('#mensaje-resultado');
 
-// TODO: C3. Declara una función nombrada para procesar el saludo
+function generarSaludo() {
 
-// TODO: C4 y C5. Agrega los eventos addEventListener para actualizar la pantalla
+    let nombre = inputNombre.value.trim();
+
+    // Verificamos si el campo está vacío
+    if (nombre === "") {
+        mensajeResultado.textContent = "Por favor, ingresa un nombre válido.";
+        mensajeResultado.style.color = "#DC2626";
+    } else {
+        mensajeResultado.textContent = `¡Bienvenido al Técnico Salesiano, ${nombre}!`;
+        mensajeResultado.style.color = "#16A34A";
+    }
+}
+
+function limpiarFormulario() {
+    inputNombre.value = "";
+    mensajeResultado.textContent = "Esperando interacción...";
+    mensajeResultado.style.color = "#000000";
+    inputNombre.focus();
+}
+
+btnSaludar.addEventListener('click', generarSaludo);
+
+btnLimpiar.addEventListener('click', limpiarFormulario);
+
+inputNombre.addEventListener('keypress', function (evento) {
+    if (evento.key === 'Enter') {
+        generarSaludo();
+    }
+});
