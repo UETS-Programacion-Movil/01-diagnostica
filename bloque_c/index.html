@@ -11,6 +11,7 @@
       text-align: center;
       background-color: #F8FAFC;
     }
+
     .card {
       max-width: 500px;
       margin: 0 auto;
@@ -20,6 +21,7 @@
       box-shadow: 6px 6px 0px #000;
       border-radius: 8px;
     }
+
     button {
       padding: 10px 20px;
       font-size: 16px;
@@ -29,6 +31,7 @@
       cursor: pointer;
       margin: 8px;
     }
+
     #mensaje-resultado {
       margin-top: 20px;
       padding: 12px;
@@ -36,7 +39,7 @@
       font-size: 18px;
     }
   </style>
-  <!-- TODO: C1. Vincular el archivo script.js con <script src="script.js"></script> -->
+  <script src="script.js"></script>
 </head>
 <body>
 
@@ -44,8 +47,11 @@
     <h1>Panel Interactivo UETS</h1>
     <p>Ingresa tu nombre para generar tu saludo oficial:</p>
     <br>
+
     <input type="text" id="input-nombre" placeholder="Ej: Mateo Vintimilla" style="padding: 8px; font-size: 16px; width: 80%; border: 2px solid #000; border-radius: 4px;">
+
     <br><br>
+
     <button id="btn-saludar">Saludar al Estudiante</button>
     <button id="btn-limpiar" style="background: #FDA4AF;">Limpiar</button>
 
