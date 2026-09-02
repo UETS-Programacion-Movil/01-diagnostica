@@ -16,6 +16,7 @@ public class Ejercicio2 {
         } else {
             System.out.println("División: no se puede dividir entre cero");
         }
-        scanner.close();
+        scanner.close(); 
+
     }
 }
