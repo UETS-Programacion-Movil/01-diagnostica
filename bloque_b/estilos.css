@@ -1,12 +1,21 @@
-/* 
- * ============================================================================
- * 🎓 EVALUACIÓN DIAGNÓSTICA — BLOQUE B: ESTILOS CSS3 (CE2)
- * ============================================================================
- * 
- * 📌 REQUERIMIENTOS:
- * 1. Utiliza selectores de clase (.) y de identificador (#).
- * 2. Define al menos 3 propiedades CSS (color, background, font, margin, padding, border, etc.).
- * 3. Aplica un layout moderno usando Flexbox (display: flex) o CSS Grid (display: grid).
- */
 
-/* TODO: Escribe aquí tus reglas de estilos CSS */
+#titulo {
+    color: blue;
+    background: lightgray;
+    padding: 10px;
+    text-align: center;
+}
+
+.contenedor {
+    display: flex;
+    gap: 20px;
+    margin: 20px;
+    padding: 20px;
+}
+
+.caja {
+    background: lightblue;
+    border: 2px solid blue;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
