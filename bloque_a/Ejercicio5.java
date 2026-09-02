@@ -1,12 +1,10 @@
 public class Ejercicio5 {
-
-    // TODO: Define la función estática calcularPromedio(double a, double b)
-
     public static void main(String[] args) {
-        // TODO: Prueba la función calcularPromedio
+        int resultado = sumar(8, 12);
+        System.out.println("Resultado de la función sumar: " + resultado);
+    }
 
-        // TODO: Instancia la clase Estudiante y llama a su método mostrarFicha()
+    public static int sumar(int n1, int n2) {
+        return n1 + n2;
     }
 }
-
-// TODO: Crea aquí la clase Estudiante con sus atributos, constructor y métodos
