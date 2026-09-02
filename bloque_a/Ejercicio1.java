@@ -1,8 +1,14 @@
 public class Ejercicio1 {
     public static void main(String[] args) {
-        // TODO: Declara aquí tus variables y asígnales valores
+        int numero = 2;
+        String cadena = "adios";
+        boolean estado = False;
+        double flotante = 2,56;
 
-        // TODO: Muestra los valores por consola
+        System.out.println(numero);
+        System.out.println(cadena);
+        System.out.println(estado);
+        System.out.println(flotante);
         
     }
 }
