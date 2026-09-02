@@ -15,4 +15,4 @@ public class Ejercicio2 {
 
         scanner.close();
     }
-}
+}   
