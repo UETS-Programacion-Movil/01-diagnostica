@@ -9,4 +9,38 @@
  * 3. Aplica un layout moderno usando Flexbox (display: flex) o CSS Grid (display: grid).
  */
 
-/* TODO: Escribe aquí tus reglas de estilos CSS */
+body {
+  margin: 0;
+  color: #172033;
+  background-color: #f1f5f9;
+  font-family: Arial, sans-serif;
+}
+
+#encabezado {
+  padding: 32px;
+  color: white;
+  background-color: #1d4ed8;
+  text-align: center;
+}
+
+.tarjetas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.tarjeta {
+  flex: 1 1 280px;
+  padding: 24px;
+  background: white;
+  border: 2px solid #172033;
+  border-radius: 8px;
+}
+
+footer {
+  padding: 20px;
+  text-align: center;
+}
