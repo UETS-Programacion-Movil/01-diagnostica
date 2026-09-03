@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+<<<<<<< HEAD
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Evaluación Diagnóstica: Soporte Técnico | UETS</title>
@@ -1100,3 +1101,1580 @@ Serial.println(" V");</code></pre>
     </script>
 </body>
 </html>
+=======
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Semana 01: Evaluación Diagnóstica & Prerrequisitos Móviles | UETS</title>
+  
+  <!-- Google Fonts: Archivo Black, Space Grotesk, JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=JetBrains+Mono:ital,wght@0,400;0,700;1,400&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Lucide Icons Oficial -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    /* ==========================================================================
+       VIEWPORT BASE & STAGE SCALING (1920x1080 Standard)
+       ========================================================================== */
+    :root {
+      --canvas-w: 1920px;
+      --canvas-h: 1080px;
+
+      /* Neo-Brutalist Color Palette */
+      --cream: #FFFDF9;
+      --cream-2: #F5EFE6;
+      --ink: #0A0A0A;
+      --ink-2: #262626;
+      --ink-muted: #525252;
+      
+      --green: #10B981;
+      --green-dark: #047857;
+      --green-light: #D1FAE5;
+
+      --pink: #F43F5E;
+      --pink-dark: #BE123C;
+      --pink-light: #FFE4E6;
+
+      --orange: #F97316;
+      --orange-light: #FFEDD5;
+
+      --yellow: #FDE047;
+      --yellow-dark: #CA8A04;
+      --yellow-light: #FEF9C3;
+
+      --cyan: #38BDF8;
+      --cyan-light: #E0F2FE;
+
+      --salesian-red: #991B1B;
+
+      --border-thick: 4px solid var(--ink);
+      --border-thin: 2.5px solid var(--ink);
+
+      --shadow-ink: 6px 6px 0px var(--ink);
+      --shadow-ink-lg: 10px 10px 0px var(--ink);
+      --shadow-yellow: 6px 6px 0px var(--yellow-dark);
+      --shadow-green: 6px 6px 0px var(--green-dark);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    html, body {
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      background-color: #0D0D0D;
+      font-family: 'Space Grotesk', sans-serif;
+      color: var(--ink);
+      user-select: none;
+    }
+
+    #stage-container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: var(--canvas-w);
+      height: var(--canvas-h);
+      background-color: var(--cream);
+      box-shadow: 0 25px 60px rgba(0,0,0,0.85);
+      overflow: hidden;
+      transform-origin: center center;
+    }
+
+    /* SLIDE STACK MANAGEMENT */
+    .slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 1920px;
+      height: 1080px;
+      padding: 85px 96px 70px 96px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      transform: scale(0.985);
+      background-color: var(--cream);
+      z-index: 1;
+    }
+
+    .slide.active {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transform: scale(1);
+      z-index: 2;
+    }
+
+    /* CHROME & TOPBAR */
+    .topbar {
+      position: absolute;
+      top: 30px;
+      left: 96px;
+      right: 96px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 19px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      z-index: 10;
+    }
+
+    .topbar-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .pill {
+      background: var(--yellow);
+      border: var(--border-thin);
+      padding: 5px 16px;
+      font-size: 15px;
+      font-weight: 800;
+      box-shadow: 3px 3px 0 var(--ink);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border-radius: 6px;
+    }
+
+    .pill-green { background: var(--green); color: #FFF; }
+    .pill-pink { background: var(--pink); color: #FFF; }
+    .pill-orange { background: var(--orange); color: #FFF; }
+    .pill-cyan { background: var(--cyan); color: var(--ink); }
+    .pill-inst { background: var(--salesian-red); color: #FFF; }
+
+    .bottombar {
+      position: absolute;
+      bottom: 28px;
+      left: 96px;
+      right: 96px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 17px;
+      color: var(--ink-muted);
+      border-top: 2px solid rgba(10,10,10,0.15);
+      padding-top: 10px;
+      z-index: 10;
+    }
+
+    .bottom-controls {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .ctrl-pill {
+      background: #FFF;
+      border: var(--border-thin);
+      padding: 4px 10px;
+      font-size: 13px;
+      font-weight: 700;
+      box-shadow: 2px 2px 0 var(--ink);
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .ctrl-pill:hover {
+      background: var(--yellow);
+    }
+
+    /* PROGRESS BAR */
+    #progress-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 8px;
+      background: var(--yellow);
+      width: 0%;
+      transition: width 0.3s ease;
+      z-index: 20;
+    }
+
+    /* TYPOGRAPHY */
+    .font-display {
+      font-family: 'Archivo Black', sans-serif;
+      text-transform: uppercase;
+      line-height: 0.95;
+      letter-spacing: -0.02em;
+    }
+
+    .title-hero {
+      font-size: 96px;
+      color: var(--ink);
+      margin-bottom: 18px;
+    }
+
+    .title-xl {
+      font-size: 54px;
+      color: var(--ink);
+      margin-bottom: 14px;
+    }
+
+    .title-lg {
+      font-size: 42px;
+      color: var(--ink);
+      margin-bottom: 12px;
+    }
+
+    .subtitle-hero {
+      font-size: 28px;
+      font-weight: 500;
+      color: var(--ink-2);
+      line-height: 1.35;
+      max-width: 1400px;
+    }
+
+    .mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* NEO-BRUTALIST CARDS & COMPONENTS */
+    .card {
+      background: #FFFFFF;
+      border: var(--border-thick);
+      box-shadow: var(--shadow-ink);
+      padding: 26px;
+      border-radius: 10px;
+      position: relative;
+    }
+
+    .card-cream { background: var(--cream-2); }
+    .card-yellow { background: var(--yellow-light); }
+    .card-green { background: var(--green-light); border-color: var(--ink); }
+    .card-pink { background: var(--pink-light); }
+    .card-orange { background: var(--orange-light); }
+    .card-cyan { background: var(--cyan-light); }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      height: 100%;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 22px;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 18px;
+    }
+
+    /* CODE & TERMINAL BOXES */
+    .code-box {
+      background: #141820;
+      color: #E6EDF3;
+      border: var(--border-thick);
+      box-shadow: var(--shadow-ink);
+      padding: 18px 22px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 16px;
+      line-height: 1.42;
+      border-radius: 8px;
+      overflow: hidden;
+      white-space: pre;
+    }
+
+    .code-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 8px;
+      margin-bottom: 10px;
+      border-bottom: 2px solid #2D333B;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+
+    .tag-term { color: #58A6FF; }
+    .tag-pass { color: #7EE787; font-weight: 700; }
+    .tag-warn { color: #F0883E; }
+    .kw { color: #FF7B72; font-weight: 700; }
+    .type { color: #79C0FF; }
+    .str { color: #A5D6FF; }
+    .fn { color: #D2A8FF; }
+    .cm { color: #8B949E; font-style: italic; }
+    .num { color: #79C0FF; }
+
+    /* QUIZ WIDGET */
+    .quiz-container {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    .quiz-question {
+      font-size: 26px;
+      font-weight: 700;
+      line-height: 1.25;
+      padding: 16px 20px;
+      background: #FFFFFF;
+      border: var(--border-thick);
+      box-shadow: var(--shadow-ink);
+      border-radius: 8px;
+    }
+
+    .quiz-options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .quiz-btn {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 20px;
+      font-weight: 600;
+      text-align: left;
+      padding: 16px 20px;
+      background: #FFFFFF;
+      border: var(--border-thick);
+      box-shadow: var(--shadow-ink);
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-radius: 8px;
+    }
+
+    .quiz-btn:hover {
+      transform: translate(-3px, -3px);
+      box-shadow: var(--shadow-ink-lg);
+      background: var(--yellow-light);
+    }
+
+    .quiz-btn.correct {
+      background: #BBF7D0 !important;
+      border-color: var(--green-dark) !important;
+      box-shadow: 6px 6px 0 var(--green-dark) !important;
+      color: #064E3B !important;
+    }
+
+    .quiz-btn.incorrect {
+      background: #FECACA !important;
+      border-color: #991B1B !important;
+      box-shadow: 6px 6px 0 #991B1B !important;
+      color: #7F1D1D !important;
+    }
+
+    .quiz-feedback {
+      margin-top: 10px;
+      padding: 14px 18px;
+      border: var(--border-thick);
+      font-size: 18px;
+      font-weight: 600;
+      border-radius: 8px;
+      display: none;
+    }
+
+    /* STEP CIRCLES */
+    .step-circle {
+      width: 40px;
+      height: 40px;
+      background: var(--ink);
+      color: #FFFFFF;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 19px;
+      margin-right: 12px;
+      border-radius: 50%;
+    }
+
+    #controls-hint {
+      position: absolute;
+      top: 12px;
+      right: 15px;
+      background: rgba(10,10,10,0.85);
+      color: #FFFFFF;
+      padding: 6px 12px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      border-radius: 4px;
+      z-index: 100;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="controls-hint">⌨ [←] [→] [Espacio] Navegar | [F] Pantalla Completa</div>
+
+  <div id="stage-container">
+    <div id="progress-bar"></div>
+
+    <!-- ==================== SLIDE 01: PORTADA ==================== -->
+    <section class="slide active" data-slide="1">
+      <div class="topbar">
+        <div class="topbar-left">
+          <span class="pill pill-inst"><i data-lucide="shield" style="width: 16px; height: 16px;"></i> UETS · INFORMÁTICA</span>
+          <span>PROGRAMACIÓN MÓVIL · 3° BACHILLERATO</span>
+        </div>
+        <div>AÑO LECTIVO 2026–2027</div>
+      </div>
+
+      <div style="margin-top: 40px;">
+        <div class="pill" style="margin-bottom: 20px; font-size: 18px; padding: 8px 20px;">
+          <i data-lucide="award" style="width: 20px; height: 20px;"></i> DIAGNÓSTICO DE PRERREQUISITOS
+        </div>
+        <h1 class="font-display title-hero">EVALUACIÓN<br>DIAGNÓSTICA</h1>
+        <p class="subtitle-hero">
+          Validando nuestros cimientos de Lógica, POO en Java y la Triada Web (HTML5 + CSS3 + JS) antes de dar el salto al desarrollo móvil profesional con TypeScript y Expo.
+        </p>
+      </div>
+
+      <div class="grid-3" style="margin-top: 30px;">
+        <div class="card card-yellow">
+          <div class="mono" style="font-size: 14px; font-weight: 700; color: var(--yellow-dark); margin-bottom: 6px;">
+            <i data-lucide="code" style="width: 16px; height: 16px; display: inline; vertical-align: middle;"></i> DOCENTE TITULAR
+          </div>
+          <div style="font-size: 20px; font-weight: 700;">Ing. Milton Velásquez</div>
+          <div style="font-size: 15px; color: var(--ink-muted); margin-top: 4px;">U.E. Técnico Salesiano</div>
+        </div>
+
+        <div class="card card-cyan">
+          <div class="mono" style="font-size: 14px; font-weight: 700; color: #0284C7; margin-bottom: 6px;">
+            <i data-lucide="git-branch" style="width: 16px; height: 16px; display: inline; vertical-align: middle;"></i> PRIMER TALLER
+          </div>
+          <div style="font-size: 20px; font-weight: 700;">Git + GitHub Flow</div>
+          <div style="font-size: 15px; color: var(--ink-muted); margin-top: 4px;">Fork, Branch y Pull Request</div>
+        </div>
+
+        <div class="card card-green">
+          <div class="mono" style="font-size: 14px; font-weight: 700; color: var(--green-dark); margin-bottom: 6px;">
+            <i data-lucide="check-circle" style="width: 16px; height: 16px; display: inline; vertical-align: middle;"></i> MODELO EVALUATIVO
+          </div>
+          <div style="font-size: 20px; font-weight: 700;">Dual MIT (10.0 Pts)</div>
+          <div style="font-size: 15px; color: var(--ink-muted); margin-top: 4px;">50% GitHub / 50% Video Oral</div>
+        </div>
+      </div>
+
+      <div class="bottombar">
+        <span>UNIDAD EDUCATIVA TÉCNICO SALESIANO · CUENCA, ECUADOR</span>
+        <div class="bottom-controls">
+          <span class="ctrl-pill" onclick="nextSlide()">Siguiente [→]</span>
+          <span class="ctrl-pill" onclick="toggleFullscreen()">[F] Fullscreen</span>
+        </div>
+        <span class="slide-num">SLIDE 01 / 18</span>
+      </div>
+    </section>
+
+    <!-- ==================== SLIDE 02: MODELO DUAL MIT ==================== -->
+    <section class="slide" data-slide="2">
+      <div class="topbar">
+        <div class="topbar-left">
+          <span class="pill pill-green"><i data-lucide="scale" style="width: 16px; height: 16px;"></i> METODOLOGÍA EVALUATIVA</span>
+          <span>ESTÁNDAR INSTITUCIONAL</span>
+        </div>
+        <div>PONDERACIÓN DUAL: 10.0 PUNTOS</div>
+      </div>
+
+      <div style="margin-top: 10px;">
+        <h2 class="font-display title-xl">EL MODELO DUAL MIT (10.0 PTS)</h2>
+        <p style="font-size: 24px; color: var(--ink-2); margin-bottom: 20px;">
+          En el Técnico Salesiano evaluamos el <b>saber hacer en código</b> y la <b>capacidad de sustentación oral</b>.
+        </p>
+      </div>
+
+      <div class="grid-2">
+        <div class="card card-cyan">
+          <div class="mono" style="font-size: 20px; font-weight: 800; color: #0369A1; margin-bottom: 8px;">
+            <i data-lucide="github" style="width: 20px; height: 20px; display: inline; vertical-align: middle;"></i> BLOQUE A: CÓDIGO (50% · 5.0 PTS)
+          </div>
+          <h3 class="font-display" style="font-size: 28px; margin-bottom: 12px;">REPOSITORIO EN GITHUB</h3>
+          <ul style="font-size: 19px; line-height: 1.6; margin-left: 20px; font-weight: 600;">
+            <li><b>4.0 pts:</b> 4 Bloques prácticos aprobando suites con <span class="mono">pnpm run test:all</span> (1.0 pt c/u).</li>
+            <li><b>0.5 pts:</b> Verificación de tipos <span class="mono">pnpm run check</span> con 0 errores.</li>
+            <li><b>0.5 pts:</b> Commits semánticos y entrega ordenada en Pull Request.</li>
+            <li><b>Evaluación:</b> Autograding Bot en menos de 60 segundos.</li>
+          </ul>
+        </div>
+
+        <div class="card card-orange">
+          <div class="mono" style="font-size: 20px; font-weight: 800; color: #C2410C; margin-bottom: 8px;">
+            <i data-lucide="video" style="width: 20px; height: 20px; display: inline; vertical-align: middle;"></i> BLOQUE B: VIDEO (50% · 5.0 PTS)
+          </div>
+          <h3 class="font-display" style="font-size: 28px; margin-bottom: 12px;">SCREENCAST ORAL</h3>
+          <ul style="font-size: 19px; line-height: 1.6; margin-left: 20px; font-weight: 600;">
+            <li><b>Duración:</b> Video técnico de <b>5 a 6 minutos</b> (Loom, Clipchamp u OBS).</li>
+            <li><b>Cámara:</b> Rostro visible del estudiante y voz clara explicando su lógica.</li>
+            <li><b>En vivo:</b> Ejecución de <span class="mono">pnpm run test:all</span> y consola web sin errores (F12).</li>
+            <li><b>Entrega:</b> Enlace público pegado en la descripción del PR.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bottombar">
+        <span>SISTEMA DE CALIFICACIÓN FORMATIVA Y SUMATIVA</span>
+        <div class="bottom-controls">
+          <span class="ctrl-pill" onclick="prevSlide()">[←]</span>
+          <span class="ctrl-pill" onclick="nextSlide()">[→]</span>
+        </div>
+        <span class="slide-num">SLIDE 02 / 18</span>
+      </div>
+    </section>
+
+    <!-- ==================== SLIDE 03: LOS 4 BLOQUES ==================== -->
+    <section class="slide" data-slide="3">
+      <div class="topbar">
+        <div class="topbar-left">
+          <span class="pill pill-yellow"><i data-lucide="layers" style="width: 16px; height: 16px;"></i> ESTRUCTURA DEL TALLER</span>
+          <span>4 CRITERIOS DE EVALUACIÓN</span>
+        </div>
+        <div>MAPA DE CONTENIDOS DIAGNÓSTICOS</div>
+      </div>
+
+      <div style="margin-top: 10px;">
+        <h2 class="font-display title-xl">LOS 4 BLOQUES DE EVALUACIÓN</h2>
+        <p style="font-size: 24px; color: var(--ink-2); margin-bottom: 20px;">
+          Cada bloque evalúa un pilar indispensable para afrontar el desarrollo móvil en 3° BGU:
+        </p>
+      </div>
+
+      <div class="grid-4">
+        <div class="card card-pink">
+          <div class="pill pill-pink" style="font-size: 12px; margin-bottom: 8px;">CE1 · 1.0 PT</div>
+          <h3 class="font-display" style="font-size: 20px; margin-bottom: 8px;">BLOQUE A: JAVA</h3>
+          <p style="font-size: 15px; font-weight: 600; line-height: 1.45;">
+            5 ejercicios en <span class="mono">bloque_a/</span>: Variables, Scanner, if/else, bucles for/while y POO (Clase Estudiante).
+          </p>
+        </div>
+
+        <div class="card card-cyan">
+          <div class="pill pill-cyan" style="font-size: 12px; margin-bottom: 8px;">CE2 · 1.0 PT</div>
+          <h3 class="font-display" style="font-size: 20px; margin-bottom: 8px;">BLOQUE B: HTML+CSS</h3>
+          <p style="font-size: 15px; font-weight: 600; line-height: 1.45;">
+            Maquetación en <span class="mono">bloque_b/</span> con etiquetas semánticas, estilos externos, selectores y Flexbox o Grid.
+          </p>
+        </div>
+
+        <div class="card card-yellow">
+          <div class="pill" style="font-size: 12px; margin-bottom: 8px; background: #FFF;">CE3 · 1.0 PT</div>
+          <h3 class="font-display" style="font-size: 20px; margin-bottom: 8px;">BLOQUE C: JS & DOM</h3>
+          <p style="font-size: 15px; font-weight: 600; line-height: 1.45;">
+            Interactividad en <span class="mono">bloque_c/</span> con let/const, funciones con nombre, querySelector y addEventListener.
+          </p>
+        </div>
+
+        <div class="card card-green">
+          <div class="pill pill-green" style="font-size: 12px; margin-bottom: 8px;">CE4 · 1.0 PT</div>
+          <h3 class="font-display" style="font-size: 20px; margin-bottom: 8px;">BLOQUE D: DEBUG</h3>
+          <p style="font-size: 15px; font-weight: 600; line-height: 1.45;">
+            Depuración en <span class="mono">bloque_d/</span> de triada rota, corrección de bugs y reporte técnico <span class="mono">REPORTE_BUGS.md</span>.
+          </p>
+        </div>
+      </div>
+
+      <div class="card card-cream" style="margin-top: 20px; padding: 14px 20px;">
+        <span class="mono" style="font-weight: 800; color: var(--orange);"><i data-lucide="zap" style="width: 18px; height: 18px; display: inline; vertical-align: middle;"></i> FLUJO RECOMENDADO:</span>
+        <span style="font-size: 18px; margin-left: 8px; font-weight: 600;">
+          Resuelve los ejercicios en orden, corre el comando individual de cada bloque (<span class="mono">pnpm run start:01</span> a <span class="mono">start:04</span>) y finaliza con <span class="mono">pnpm run test:all</span>.
+        </span>
+      </div>
+
+      <div class="bottombar">
+        <span>VISIÓN GENERAL DE LA PRUEBA DIAGNÓSTICA</span>
+        <div class="bottom-controls">
+          <span class="ctrl-pill" onclick="prevSlide()">[←]</span>
+          <span class="ctrl-pill" onclick="nextSlide()">[→]</span>
+        </div>
+        <span class="slide-num">SLIDE 03 / 18</span>
+      </div>
+    </section>
+
+    <!-- ==================== SLIDE 04: BLOQUE A DETALLE ==================== -->
+    <section class="slide" data-slide="4">
+      <div class="topbar">
+        <div class="topbar-left">
+          <span class="pill pill-pink"><i data-lucide="coffee" style="width: 16px; height: 16px;"></i> CRITERIO CE1</span>
+          <span>BLOQUE A: FUNDAMENTOS DE JAVA</span>
+        </div>
+        <div>bloque_a/Ejercicio1.java a Ejercicio5.java</div>
+      </div>
+
+      <div style="margin-top: 10px;">
+        <h2 class="font-display title-xl">BLOQUE A: LÓGICA & POO EN JAVA</h2>
+        <p style="font-size: 24px; color: var(--ink-2); margin-bottom: 16px;">
+          Demuestra tu dominio en sintaxis estricta, tipos, entrada de datos y programación orientada a objetos:
+        </p>
+      </div>
+
+      <div class="grid-2">
+        <div class="card card-pink">
+          <h3 class="font-display" style="font-size: 22px; margin-bottom: 10px;"><i data-lucide="check-square" style="width: 18px; height: 18px; display: inline; vertical-align: middle;"></i> 5 EJERCICIOS INDEPENDIENTES:</h3>
+          <ul style="font-size: 17px; line-height: 1.5; margin-left: 20px; font-weight: 600;">
+            <li><b>A1. Ejercicio1.java:</b> Declarar variables (<span class="mono">int, double, String, boolean</span>) y mostrarlas con <span class="mono">System.out.println()</span>.</li>
+            <li><b>A2. Ejercicio2.java:</b> Lectura con <span class="mono">Scanner(System.in)</span> y cálculo de suma, resta, multiplicación y división.</li>
+            <li><b>A3. Ejercicio3.java:</b> Condicional <span class="mono">if / else</span> para evaluar si una persona es mayor o menor de edad (&gt;= 18).</li>
+            <li><b>A4. Ejercicio4.java:</b> Bucle <span class="mono">for</span> (1 al 20) y bucle <span class="mono">while</span> (20 al 1).</li>
+            <li><b>A5. Ejercicio5.java:</b> Función <span class="mono">calcularPromedio(double a, double b)</span> y clase <span class="mono">Estudiante</span> con instanciación.</li>
+          </ul>
+        </div>
+
+        <div class="card card-cream">
+          <h3 class="font-display" style="font-size: 22px; margin-bottom: 10px;"><i data-lucide="alert-triangle" style="width: 18px; height: 18px; display: inline; vertical-align: middle;"></i> REGLAS Y CONDICIONES TÉCNICAS:</h3>
+          <ul style="font-size: 17px; line-height: 1.55; margin-left: 20px; font-weight: 600;">
+            <li><b>Completitud:</b> Debes borrar los comentarios <span class="mono">// TODO:</span> y escribir la implementación requerida.</li>
+            <li><b>Sin Lambdas:</b> No utilizar funciones flecha en Java; emplear métodos estáticos y clases clásicas.</li>
+            <li><b>Compilación:</b> Cada archivo debe compilar limpiamente con el compilador estándar de Java (<span class="mono">javac</span>).</li>
+            <li><b>Puntaje:</b> 1.00 punto completo verificado por la suite de pruebas unitarias.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bottombar">
+        <span>BLOQUE A: FUNDAMENTOS DE JAVA Y LÓGICA</span>
+        <div class="bottom-controls">
+          <span class="ctrl-pill" onclick="prevSlide()">[←]</span>
+          <span class="ctrl-pill" onclick="nextSlide()">[→]</span>
+        </div>
+        <span class="slide-num">SLIDE 04 / 18</span>
+      </div>
+    </section>
+
+    <!-- ==================== SLIDE 05: SALIDA ESPERADA BLOQUE A ==================== -->
+    <section class="slide" data-slide="5">
+      <div class="topbar">
+        <div class="topbar-left">
+          <span class="pill pill-pink"><i data-lucide="terminal" style="width: 16px; height: 16px;"></i> VERIFICACIÓN RETO 01</span>
+          <span>SALIDA ESPERADA EN TERMINAL</span>
+        </div>
+        <div>COMANDO: pnpm run start:01</div>
+      </div>
+
+      <div style="margin-top: 10px;">
+        <h2 class="font-display title-xl">SALIDA ESPERADA: BLOQUE A</h2>
+        <p style="font-size: 24px; color: var(--ink-2); margin-bottom: 16px;">
+          Cuando completes correctamente los 5 ejercicios de Java, la suite mostrará todos los checks en verde:
+        </p>
+      </div>
+
+      <div class="grid-2">
+        <div class="card card-cream">
+          <div class="code-header">
+            <span class="tag-term">💻 TERMINAL: pnpm run start:01</span>
+            <span class="tag-pass">PASSED (1.00 PT)</span>
+          </div>
+          <div class="code-box" style="font-size: 13.5px; line-height: 1.35;">
+======================================================================
+🥊 RETO 01: Lógica y Fundamentos de Java (CE1 · 1.00 pt)
+======================================================================
+  ✅ [PASS] Archivo Ejercicio1.java existe
+  ✅ [PASS] Archivo Ejercicio2.java existe
+  ✅ [PASS] Archivo Ejercicio3.java existe
+  ✅ [PASS] Archivo Ejercicio4.java existe
+  ✅ [PASS] Archivo Ejercicio5.java existe
+  ✅ [PASS] Ejercicio 1 resuelto
+  ✅ [PASS] Ejercicio 1 contiene tipos requeridos
+  ✅ [PASS] Ejercicio 1 imprime por consola
+  ✅ [PASS] Ejercicio 2 resuelto
+  ✅ [PASS] Ejercicio 2 usa Scanner
+  ✅ [PASS] Ejercicio 3 resuelto
+  ✅ [PASS] Ejercicio 3 usa estructura if/else
+  ✅ [PASS] Ejercicio 4 resuelto
+  ✅ [PASS] Ejercicio 4 contiene bucles for y while
+  ✅ [PASS] Ejercicio 5 resuelto
+  ✅ [PASS] Ejercicio 5 contiene función y clase POO
+
+✨ ¡Excelente trabajo! Has completado con éxito el Bloque A (+1.00 pt)
+          </div>
+        </div>
+
+        <div class="card card-pink">
+          <h3 class="font-display" style="font-size: 22px; margin-bottom: 12px;"><i data-lucide="help-circle" style="width: 18px; height: 18px; display: inline; vertical-align: middle;"></i> PISTAS SI UN TEST FALLA:</h3>
+          <ul style="font-size: 16px; line-height: 1.5; margin-left: 20px; font-weight: 600;">
+            <li><b>❌ Ejercicio 1:</b> Asegúrate de declarar al menos una variable <span class="mono">int</span>, <span class="mono">double</span>, <span class="mono">String</span> y <span class="mono">boolean</span>.</li>
+            <li><b>❌ Ejercicio 2:</b> Comprueba haber importado <span class="mono">java.util.Scanner</span> y creado <span class="mono">new Scanner(System.in)</span>.</li>
+            <li><b>❌ Ejercicio 3:</b> Verifica que la condición compare <span class="mono">edad &gt;= 18</span> con su bloque <span class="mono">else</span>.</li>
+            <li><b>❌ Ejercicio 4:</b> Revisa que el bucle <span class="mono">for</span> incremente y el <span class="mono">while</span> decremente.</li>
+            <li><b>❌ Ejercicio 5:</b> Declara la función <span class="mono">calcularPromedio</span> y define la clase <span class="mono">class Estudiante</span>.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bottombar">
+        <span>SALIDA Y REPORTES DE PRUEBAS UNITARIAS</span>
+        <div class="bottom-controls">
+          <span class="ctrl-pill" onclick="prevSlide()">[←]</span>
+          <span class="ctrl-pill" onclick="nextSlide()">[→]</span>
+        </div>
+        <span class="slide-num">SLIDE 05 / 18</span>
+      </div>
+    </section>
+
+    <!-- ==================== SLIDE 06: QUIZ 1 ==================== -->
+    <section class="slide" data-slide="6">
+      <div class="topbar">
+        <div class="topbar-left">
+          <span class="pill pill-pink"><i data-lucide="help-circle" style="width: 16px; height: 16px;"></i> QUIZ FORMATIVO #1</span>
+          <span>JAVA & LÓGICA COMPUTACIONAL</span>
+        </div>
+        <div>PREGUNTA CONCEPTUAL CE1</div>
+      </div>
+
+      <div style="margin-top: 10px;">
+        <h2 class="font-display title-xl">COMPROBACIÓN DE FUNDAMENTOS EN JAVA</h2>
+        <p style="font-size: 24px; color: var(--ink-2); margin-bottom: 20px;">
+          Responde a la pregunta en vivo seleccionando la opción correcta:
+        </p>
+      </div>
+
+      <div class="quiz-container">
+        <div class="quiz-question">
+          En Java, para leer datos por teclado introducidos por el usuario en la consola, ¿cuál es la clase y estructura estándar recomendada?
+        </div>
+
+        <div class="quiz-options">
+          <button class="quiz-btn" onclick="checkQuiz(this, false, 'q1', 'Incorrecto. System.out solo sirve para salida de datos por pantalla, no para lectura interactiva.')">
+            <span>A.</span> <code>System.out.read()</code> directamente en el método main
+          </button>
+
+          <button class="quiz-btn" onclick="checkQuiz(this, false, 'q1', 'Incorrecto. JOptionPane es una librería gráfica Swing/AWT, no la lectura estándar de consola.')">
+            <span>B.</span> <code>JOptionPane.showInputDialog()</code> importando javax.swing
+          </button>
+
+          <button class="quiz-btn" onclick="checkQuiz(this, true, 'q1', '¡Correcto! Scanner conectado a System.in permite capturar tipos primitivos (nextInt, nextDouble, nextLine) desde el flujo de entrada estándar.')">
+            <span>C.</span> <code>Scanner sc = new Scanner(System.in)</code> importando java.util.Scanner
+          </button>
+
+          <button class="quiz-btn" onclick="checkQuiz(this, false, 'q1', 'Incorrecto. Math.random() se usa para generar números pseudoaleatorios, no para leer entradas.')">
+            <span>D.</span> <code>Math.random()</code> para inicializar buffers de entrada
+          </button>
+        </div>
+
+        <div id="feedback-q1" class="quiz-feedback"></div>
+      </div>
+
+      <div class="bottombar">
+        <span>EVALUACIÓN FORMATIVA INTERACTIVA</span>
+        <div class="bottom-controls">
+          <span class="ctrl-pill" onclick="prevSlide()">[←]</span>
+          <span class="ctrl-pill" onclick="nextSlide()">[→]</span>
+        </div>
+        <span class="slide-num">SLIDE 06 / 18</span>
+      </div>
+    </section>
+
+    <!-- ==================== SLIDE 07: BLOQUE B DETALLE ==================== -->
+    <section class="slide" data-slide="7">
+      <div class="topbar">
+        <div class="topbar-left">
+          <span class="pill pill-cyan"><i data-lucide="layout" style="width: 16px; height: 16px;"></i> CRITERIO CE2</span>
+          <span>BLOQUE B: ESTRUCTURA & MAQUETACIÓN WEB</span>
+        </div>
+        <div>bloque_b/index.html & estilos.css</div>
+      </div>
+
+      <div style="margin-top: 10px;">
+        <h2 class="font-display title-xl">BLOQUE B: HTML5 SEMÁNTICO & CSS3</h2>
+        <p style="font-size: 24px; color: var(--ink-2); margin-bottom: 16px;">
+          Construye la estructura de una página web profesional usando estándares semánticos modernos:
+        </p>
+      </div>
+
+      <div class="grid-2">
+        <div class="card card-cyan">
+          <h3 class="font-display" style="font-size: 22px; margin-bottom: 10px;"><i data-lucide="code-2" style="width: 18px; height: 18px; display: inline; vertical-align: middle;"></i> REQUERIMIENTOS DE MAQUETACIÓN:</h3>
+          <ul style="font-size: 17px; line-height: 1.5; margin-left: 20px; font-weight: 600;">
+            <li><b>B1. Estructura Semántica:</b> Emplear etiquetas <span class="mono">&lt;header&gt;</span>, <span class="mono">&lt;main&gt;</span>, <span class="mono">&lt;section&gt;</span> (o <span class="mono">&lt;article&gt;</span>) y <span class="mono">&lt;footer&gt;</span>.</li>
+            <li><b>B2. Vinculación Externa:</b> Conectar la hoja de estilos mediante <span class="mono">&lt;link rel="stylesheet" href="estilos.css"&gt;</span> dentro de <span class="mono">&lt;head&gt;</span>.</li>
+            <li><b>B3. Selectores de Clase e ID:</b> Aplicar selectores de clase (<span class="mono">.mi-clase</span>) y de ID (<span class="mono">#mi-id</span>) en <span class="mono">estilos.css</span>.</li>
+            <li><b>B4. Propiedades CSS:</b> Aplicar al menos 3 propiedades esenciales (<span class="mono">color, background, padding, margin, border</span>).</li>
+            <li><b>B5. Layout Moderno:</b> Maquetar con <span class="mono">display: flex</span> o <span class="mono">display: grid</span>.</li>
+          </ul>
+        </div>
+
+        <div class="card card-cream">
+          <h3 class="font-display" style="font-size: 22px; margin-bottom: 10px;"><i data-lucide="layers" style="width: 18px; height: 18px; display: inline; vertical-align: middle;"></i> ¿POR QUÉ ES CLAVE EN MÓVIL?</h3>
+          <p style="font-size: 17px; line-height: 1.55; margin-bottom: 12px; font-weight: 600;">
+            En React Native y Expo no existen los tags HTML del navegador, pero <b>el 100% de la maquetación móvil nativa se realiza con Flexbox</b> y modelos de cajas (Flex Direction, Justify Content, Align Items).
+          </p>
+          <div class="pill pill-cyan" style="font-size: 15px; width: 100%; justify-content: center;">
+            Flexbox en Web = Flexbox en Expo Mobile
+          </div>
+        </div>
+      </div>
+
+      <div class="bottombar">
+        <span>BLOQUE B: ESTRUCTURA HTML5 Y ESTILOS CSS3</span>
+        <div class="bottom-controls">
+          <span class="ctrl-pill" onclick="prevSlide()">[←]</span>
+          <span class="ctrl-pill" onclick="nextSlide()">[→]</span>
+        </div>
+        <span class="slide-num">SLIDE 07 / 18</span>
+      </div>
+    </section>
+
+    <!-- ==================== SLIDE 08: SALIDA ESPERADA BLOQUE B ==================== -->
+    <section class="slide" data-slide="8">
+      <div class="topbar">
+        <div class="topbar-left">
+          <span class="pill pill-cyan"><i data-lucide="terminal" style="width: 16px; height: 16px;"></i> VERIFICACIÓN RETO 02</span>
+          <span>SALIDA ESPERADA EN TERMINAL</span>
+        </div>
+        <div>COMANDO: pnpm run start:02</div>
+      </div>
+
+      <div style="margin-top: 10px;">
+        <h2 class="font-display title-xl">SALIDA ESPERADA: BLOQUE B</h2>
+        <p style="font-size: 24px; color: var(--ink-2); margin-bottom: 16px;">
+          La suite de pruebas parsea el árbol DOM con JSDOM para verificar la semántica y reglas CSS:
+        </p>
+      </div>
+
+      <div class="grid-2">
+        <div class="card card-cream">
+          <div class="code-header">
+            <span class="tag-term">💻 TERMINAL: pnpm run start:02</span>
+            <span class="tag-pass">PASSED (1.00 PT)</span>
+          </div>
+          <div class="code-box" style="font-size: 14px; line-height: 1.4;">
+======================================================================
+🥊 RETO 02: Estructura HTML5 y Maquetación CSS3 (CE2 · 1.00 pt)
+======================================================================
+  ✅ [PASS] Archivo index.html existe
+  ✅ [PASS] Archivo estilos.css existe
+  ✅ [PASS] Hoja de estilos vinculada con &lt;link rel="stylesheet" ...&gt;
+  ✅ [PASS] Uso de etiqueta semántica &lt;header&gt;
+  ✅ [PASS] Uso de etiqueta semántica &lt;main&gt;
+  ✅ [PASS] Uso de &lt;section&gt; o &lt;article&gt;
+  ✅ [PASS] Uso de etiqueta semántica &lt;footer&gt;
+  ✅ [PASS] Uso de selectores de clase (.) y de ID (#)
+  ✅ [PASS] Define al menos 3 propiedades CSS fundamentales
+  ✅ [PASS] Maquetación con Flexbox o CSS Grid
+
+✨ ¡Excelente trabajo! Has completado con éxito el Bloque B (+1.00 pt)
+          </div>
+        </div>
+
+        <div class="card card-cyan">
+          <h3 class="font-display" style="font-size: 22px; margin-bottom: 12px;"><i data-lucide="alert-circle" style="width: 18px; height: 18px; display: inline; vertical-align: middle;"></i> PISTAS DE RESOLUCIÓN:</h3>
+          <ul style="font-size: 16px; line-height: 1.5; margin-left: 20px; font-weight: 600;">
+            <li><b>❌ Link CSS:</b> Agrega <span class="mono">&lt;link rel="stylesheet" href="estilos.css"&gt;</span> dentro del bloque <span class="mono">&lt;head&gt;</span>.</li>
+            <li><b>❌ Semántica:</b> No uses solo <span class="mono">&lt;div&gt;</span>; estructura con <span class="mono">&lt;header&gt;</span>, <span class="mono">&lt;main&gt;</span>, <span class="mono">&lt;section&gt;</span> y <span class="mono">&lt;footer&gt;</span>.</li>
+            <li><b>❌ Selectores:</b> En <span class="mono">estilos.css</span> debe haber al menos una regla para una clase (ej. <span class="mono">.card { ... }</span>) y un ID (ej. <span class="mono">#titulo { ... }</span>).</li>
+            <li><b>❌ Flexbox:</b> Declara <span class="mono">display: flex;</span> en tu contenedor principal.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bottombar">
+        <span>SALIDA Y REPORTES DE PRUEBAS UNITARIAS</span>
+        <div class="bottom-controls">
+          <span class="ctrl-pill" onclick="prevSlide()">[←]</span>
+          <span class="ctrl-pill" onclick="nextSlide()">[→]</span>
+        </div>
+        <span class="slide-num">SLIDE 08 / 18</span>
+      </div>
+    </section>
+
+    <!-- ==================== SLIDE 09: QUIZ 2 ==================== -->
+    <section class="slide" data-slide="9">
+      <div class="topbar">
+        <div class="topbar-left">
+          <span class="pill pill-cyan"><i data-lucide="help-circle" style="width: 16px; height: 16px;"></i> QUIZ FORMATIVO #2</span>
+          <span>MAQUETACIÓN & ESTILOS EXTERNOS</span>
+        </div>
+        <div>PREGUNTA CONCEPTUAL CE2</div>
+      </div>
+
+      <div style="margin-top: 10px;">
+        <h2 class="font-display title-xl">COMPROBACIÓN DE HTML5 Y CSS3</h2>
+        <p style="font-size: 24px; color: var(--ink-2); margin-bottom: 20px;">
+          ¿Cuál es la forma correcta y profesional de vincular una hoja de estilos externa en un documento HTML?
+        </p>
+      </div>
+
+      <div class="quiz-container">
+        <div class="quiz-question">
+          Selecciona la etiqueta y atributos estándar según las especificaciones del W3C:
+        </div>
+
+        <div class="quiz-options">
+          <button class="quiz-btn" onclick="checkQuiz(this, true, 'q2', '¡Correcto! &lt;link rel=&quot;stylesheet&quot; href=&quot;estilos.css&quot;&gt; colocado dentro de &lt;head&gt; es el estándar para vincular hojas de estilo externas.')">
+            <span>A.</span> <code>&lt;link rel="stylesheet" href="estilos.css"&gt;</code> en &lt;head&gt;
+          </button>
+
+          <button class="quiz-btn" onclick="checkQuiz(this, false, 'q2', 'Incorrecto. La etiqueta &lt;style&gt; se usa para CSS interno y no recibe el atributo src.')">
+            <span>B.</span> <code>&lt;style src="estilos.css"&gt;&lt;/style&gt;</code> en &lt;head&gt;
+          </button>
+
+          <button class="quiz-btn" onclick="checkQuiz(this, false, 'q2', 'Incorrecto. &lt;script&gt; se usa exclusivamente para archivos de JavaScript, no hojas CSS.')">
+            <span>C.</span> <code>&lt;script href="estilos.css"&gt;&lt;/script&gt;</code> en &lt;body&gt;
+          </button>
+
+          <button class="quiz-btn" onclick="checkQuiz(this, false, 'q2', 'Incorrecto. Los estilos en línea dentro del atributo style=&quot;&quot; son una mala práctica para maquetaciones completas.')">
+            <span>D.</span> Escribir todo con el atributo <code>style="..."</code> en cada etiqueta
+          </button>
+        </div>
+
+        <div id="feedback-q2" class="quiz-feedback"></div>
+      </div>
+
+      <div class="bottombar">
+        <span>EVALUACIÓN FORMATIVA INTERACTIVA</span>
+        <div class="bottom-controls">
+          <span class="ctrl-pill" onclick="prevSlide()">[←]</span>
+          <span class="ctrl-pill" onclick="nextSlide()">[→]</span>
+        </div>
+        <span class="slide-num">SLIDE 09 / 18</span>
+      </div>
+    </section>
+
+    <!-- ==================== SLIDE 10: BLOQUE C DETALLE ==================== -->
+    <section class="slide" data-slide="10">
+      <div class="topbar">
+        <div class="topbar-left">
+          <span class="pill pill-yellow"><i data-lucide="code" style="width: 16px; height: 16px;"></i> CRITERIO CE3</span>
+          <span>BLOQUE C: INTERACTIVIDAD JAVASCRIPT & DOM</span>
+        </div>
+        <div>bloque_c/index.html & script.js</div>
+      </div>
+
+      <div style="margin-top: 10px;">
+        <h2 class="font-display title-xl">BLOQUE C: JAVASCRIPT & MANIPULACIÓN DEL DOM</h2>
+        <p style="font-size: 24px; color: var(--ink-2); margin-bottom: 16px;">
+          Aplica interactividad mediante captura de eventos y actualización dinámica de elementos:
+        </p>
+      </div>
+
+      <div class="grid-2">
+        <div class="card card-yellow">
+          <h3 class="font-display" style="font-size: 22px; margin-bottom: 10px;"><i data-lucide="check-circle-2" style="width: 18px; height: 18px; display: inline; vertical-align: middle;"></i> REQUERIMIENTOS DE INTERACTIVIDAD:</h3>
+          <ul style="font-size: 17px; line-height: 1.5; margin-left: 20px; font-weight: 600;">
+            <li><b>C1. Conexión de Script:</b> Vincular el archivo externo con <span class="mono">&lt;script src="script.js"&gt;&lt;/script&gt;</span>.</li>
+            <li><b>C2. Cero 'var':</b> Usar exclusivamente <span class="mono">const</span> (por defecto) y <span class="mono">let</span> (variables mutables). ¡Prohibido <span class="mono">var</span>!</li>
+            <li><b>C3. Funciones Nombradas:</b> Definir funciones clásicas con nombre (ej. <span class="mono">function saludar(...) { ... }</span>).</li>
+            <li><b>C4. Selección y Modificación del DOM:</b> Capturar con <span class="mono">document.querySelector()</span> y alterar contenido con <span class="mono">.textContent</span> o <span class="mono">.innerHTML</span>.</li>
+            <li><b>C5. Escucha de Eventos:</b> Registrar escuchadores mediante <span class="mono">.addEventListener('click', ...)</span>.</li>
+          </ul>
+        </div>
+
+        <div class="card card-cream">
+          <h3 class="font-display" style="font-size: 22px; margin-bottom: 10px;"><i data-lucide="cpu" style="width: 18px; height: 18px; display: inline; vertical-align: middle;"></i> DEL DOM AL ESTADO MÓVIL:</h3>
+          <p style="font-size: 17px; line-height: 1.55; font-weight: 600;">
+            Comprender cómo JavaScript manipula datos ante las acciones del usuario es el paso previo directo a dominar los <b>Hooks (<span class="mono">useState</span>)</b> y los manejadores <span class="mono">onPress</span> en aplicaciones móviles con Expo.
+          </p>
+        </div>
+      </div>
+
+      <div class="bottombar">
+        <span>BLOQUE C: INTERACTIVIDAD CON JAVASCRIPT</span>
+        <div class="bottom-controls">
+          <span class="ctrl-pill" onclick="prevSlide()">[←]</span>
+          <span class="ctrl-pill" onclick="nextSlide()">[→]</span>
+        </div>
+        <span class="slide-num">SLIDE 10 / 18</span>
+      </div>
+    </section>
+
+    <!-- ==================== SLIDE 11: SALIDA ESPERADA BLOQUE C ==================== -->
+    <section class="slide" data-slide="11">
+      <div class="topbar">
+        <div class="topbar-left">
+          <span class="pill pill-yellow"><i data-lucide="terminal" style="width: 16px; height: 16px;"></i> VERIFICACIÓN RETO 03</span>
+          <span>SALIDA ESPERADA EN TERMINAL</span>
+        </div>
+        <div>COMANDO: pnpm run start:03</div>
+      </div>
+
+      <div style="margin-top: 10px;">
+        <h2 class="font-display title-xl">SALIDA ESPERADA: BLOQUE C</h2>
+        <p style="font-size: 24px; color: var(--ink-2); margin-bottom: 16px;">
+          La suite valida el código JS moderno (sin var, con funciones nombradas y addEventListener):
+        </p>
+      </div>
+
+      <div class="grid-2">
+        <div class="card card-cream">
+          <div class="code-header">
+            <span class="tag-term">💻 TERMINAL: pnpm run start:03</span>
+            <span class="tag-pass">PASSED (1.00 PT)</span>
+          </div>
+          <div class="code-box" style="font-size: 14px; line-height: 1.4;">
+======================================================================
+🥊 RETO 03: Interactividad JavaScript y DOM (CE3 · 1.00 pt)
+======================================================================
+  ✅ [PASS] Archivo index.html existe
+  ✅ [PASS] Archivo script.js existe
+  ✅ [PASS] Script externo vinculado con &lt;script src="script.js"&gt;
+  ✅ [PASS] Código completado por el estudiante
+  ✅ [PASS] Uso moderno de variables (Cero uso de "var")
+  ✅ [PASS] Declaración explícita con const y let
+  ✅ [PASS] Creación de función nombrada clásica
+  ✅ [PASS] Selección de elementos con querySelector
+  ✅ [PASS] Modificación de contenido o valores en el DOM
+  ✅ [PASS] Interactividad mediante addEventListener
+
+✨ ¡Excelente trabajo! Has completado con éxito el Bloque C (+1.00 pt)
+          </div>
+        </div>
+
+        <div class="card card-yellow">
+          <h3 class="font-display" style="font-size: 22px; margin-bottom: 12px;"><i data-lucide="alert-triangle" style="width: 18px; height: 18px; display: inline; vertical-align: middle;"></i> PISTAS DE RESOLUCIÓN:</h3>
+          <ul style="font-size: 16px; line-height: 1.5; margin-left: 20px; font-weight: 600;">
+            <li><b>❌ Cero 'var':</b> Si utilizas la palabra <span class="mono">var</span> el test fallará automáticamente. Reemplázala por <span class="mono">const</span> o <span class="mono">let</span>.</li>
+            <li><b>❌ Función con Nombre:</b> Define una función clásica como <span class="mono">function procesarSaludo() { ... }</span>.</li>
+            <li><b>❌ DOM:</b> Usa <span class="mono">document.querySelector('#mi-boton')</span> para capturar elementos y <span class="mono">elemento.textContent = '...'</span> para escribir texto.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bottombar">
+        <span>SALIDA Y REPORTES DE PRUEBAS UNITARIAS</span>
+        <div class="bottom-controls">
+          <span class="ctrl-pill" onclick="prevSlide()">[←]</span>
+          <span class="ctrl-pill" onclick="nextSlide()">[→]</span>
+        </div>
+        <span class="slide-num">SLIDE 11 / 18</span>
+      </div>
+    </section>
+
+    <!-- ==================== SLIDE 12: BLOQUE D DETALLE ==================== -->
+    <section class="slide" data-slide="12">
+      <div class="topbar">
+        <div class="topbar-left">
+          <span class="pill pill-green"><i data-lucide="bug" style="width: 16px; height: 16px;"></i> CRITERIO CE4</span>
+          <span>BLOQUE D: DEPURACIÓN INTEGRADORA</span>
+        </div>
+        <div>bloque_d/ y REPORTE_BUGS.md</div>
+      </div>
+
+      <div style="margin-top: 10px;">
+        <h2 class="font-display title-xl">BLOQUE D: DEPURACIÓN DE LA TRIADA WEB</h2>
+        <p style="font-size: 24px; color: var(--ink-2); margin-bottom: 16px;">
+          Encuentra los errores sembrados en la calculadora rota, soluciónalos y elabora el informe técnico:
+        </p>
+      </div>
+
+      <div class="grid-2">
+        <div class="card card-green">
+          <h3 class="font-display" style="font-size: 22px; margin-bottom: 10px;"><i data-lucide="search" style="width: 18px; height: 18px; display: inline; vertical-align: middle;"></i> LOS 4 BUGS A CORREGIR:</h3>
+          <ul style="font-size: 16px; line-height: 1.5; margin-left: 20px; font-weight: 600;">
+            <li><b>D1. Bug HTML:</b> Vinculación CSS rota (<span class="mono">estilos-rotos.css ➔ estilos.css</span>), etiqueta <span class="mono">&lt;header&gt;</span> no cerrada e input sin <span class="mono">id="nota2"</span>.</li>
+            <li><b>D2. Bug CSS:</b> Propiedades inválidas en <span class="mono">estilos.css</span> (<span class="mono">flexer ➔ flex</span> y <span class="mono">pointing-hand ➔ pointer</span>).</li>
+            <li><b>D3. Bug JS:</b> Error de selector (<span class="mono">#nota_inexistente ➔ #nota2</span>), concatenación de strings en promedio (<span class="mono">parseFloat()</span>) y typo (<span class="mono">textContnt ➔ textContent</span>).</li>
+            <li><b>D4. Reporte Técnico:</b> Completar <span class="mono">REPORTE_BUGS.md</span> explicando qué fallaba, la causa raíz y cómo lo solucionaste.</li>
+          </ul>
+        </div>
+
+        <div class="card card-cream">
+          <h3 class="font-display" style="font-size: 22px; margin-bottom: 10px;"><i data-lucide="check" style="width: 18px; height: 18px; display: inline; vertical-align: middle;"></i> VERIFICACIÓN EN NAVEGADOR (D5):</h3>
+          <p style="font-size: 17px; line-height: 1.5; font-weight: 600; margin-bottom: 12px;">
+            Abre <span class="mono">bloque_d/index.html</span> en tu navegador, presiona <b>F12</b> y ve a la pestaña <b>Console</b>. La calculadora debe promediar las notas con precisión y la consola debe estar <b>100% libre de errores en rojo</b>.
+          </p>
+          <div class="pill pill-green" style="font-size: 15px; width: 100%; justify-content: center;">
+            Console F12 limpia = +1.00 PT garantizado
+          </div>
+        </div>
+      </div>
+
+      <div class="bottombar">
+        <span>BLOQUE D: DEPURACIÓN Y REPORTE TÉCNICO</span>
+        <div class="bottom-controls">
+          <span class="ctrl-pill" onclick="prevSlide()">[←]</span>
+          <span class="ctrl-pill" onclick="nextSlide()">[→]</span>
+        </div>
+        <span class="slide-num">SLIDE 12 / 18</span>
+      </div>
+    </section>
+
+    <!-- ==================== SLIDE 13: SALIDA ESPERADA BLOQUE D ==================== -->
+    <section class="slide" data-slide="13">
+      <div class="topbar">
+        <div class="topbar-left">
+          <span class="pill pill-green"><i data-lucide="terminal" style="width: 16px; height: 16px;"></i> VERIFICACIÓN RETO 04</span>
+          <span>SALIDA ESPERADA EN TERMINAL</span>
+        </div>
+        <div>COMANDO: pnpm run start:04</div>
+      </div>
+
+      <div style="margin-top: 10px;">
+        <h2 class="font-display title-xl">SALIDA ESPERADA: BLOQUE D</h2>
+        <p style="font-size: 24px; color: var(--ink-2); margin-bottom: 16px;">
+          Resultado obtenido al corregir la triada y completar el archivo <span class="mono">REPORTE_BUGS.md</span>:
+        </p>
+      </div>
+
+      <div class="grid-2">
+        <div class="card card-cream">
+          <div class="code-header">
+            <span class="tag-term">💻 TERMINAL: pnpm run start:04</span>
+            <span class="tag-pass">PASSED (1.00 PT)</span>
+          </div>
+          <div class="code-box" style="font-size: 14px; line-height: 1.4;">
+======================================================================
+🥊 RETO 04: Depuración Integradora y Triada Web (CE4 · 1.00 pt)
+======================================================================
+  ✅ [PASS] Archivo index.html existe
+  ✅ [PASS] Archivo estilos.css existe
+  ✅ [PASS] Archivo script.js existe
+  ✅ [PASS] Archivo REPORTE_BUGS.md existe
+  ✅ [PASS] Bug de enlace CSS en HTML corregido
+  ✅ [PASS] Inputs con IDs correctos para selector JS
+  ✅ [PASS] Bug de propiedad display corregido en CSS
+  ✅ [PASS] Bug de cursor corregido en CSS
+  ✅ [PASS] Bug de propiedad textContent corregido en JS
+  ✅ [PASS] Bug de selector corregido en JS
+  ✅ [PASS] Conversión numérica de strings en JS
+  ✅ [PASS] Reporte de bugs documentado en REPORTE_BUGS.md
+
+✨ ¡Excelente trabajo! Has completado con éxito el Bloque D (+1.00 pt)
+          </div>
+        </div>
+
+        <div class="card card-green">
+          <h3 class="font-display" style="font-size: 22px; margin-bottom: 12px;"><i data-lucide="check-circle" style="width: 18px; height: 18px; display: inline; vertical-align: middle;"></i> CHECKLIST FINAL DEL REPORTE:</h3>
+          <ul style="font-size: 16px; line-height: 1.5; margin-left: 20px; font-weight: 600;">
+            <li><b>Nombre y Paralelo:</b> Llena tus datos al inicio de <span class="mono">REPORTE_BUGS.md</span>.</li>
+            <li><b>Causa Raíz:</b> No escribas solo "lo arreglé"; explica por qué fallaba (ej. <span class="mono">"input.value devuelve un string y al sumar generaba concatenación"</span>).</li>
+            <li><b>Solución:</b> Explica qué función o regla usaste para corregirlo.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bottombar">
+        <span>SALIDA Y REPORTES DE PRUEBAS UNITARIAS</span>
+        <div class="bottom-controls">
+          <span class="ctrl-pill" onclick="prevSlide()">[←]</span>
+          <span class="ctrl-pill" onclick="nextSlide()">[→]</span>
+        </div>
+        <span class="slide-num">SLIDE 13 / 18</span>
+      </div>
+    </section>
+
+    <!-- ==================== SLIDE 14: QUIZ 3 ==================== -->
+    <section class="slide" data-slide="14">
+      <div class="topbar">
+        <div class="topbar-left">
+          <span class="pill pill-green"><i data-lucide="help-circle" style="width: 16px; height: 16px;"></i> QUIZ FORMATIVO #3</span>
+          <span>DEPURACIÓN & CONVERSIÓN DE TIPOS</span>
+        </div>
+        <div>PREGUNTA CONCEPTUAL CE4</div>
+      </div>
+
+      <div style="margin-top: 10px;">
+        <h2 class="font-display title-xl">COMPROBACIÓN DE DEPURACIÓN EN JAVASCRIPT</h2>
+        <p style="font-size: 24px; color: var(--ink-2); margin-bottom: 20px;">
+          Al obtener el valor de dos inputs <span class="mono">input1.value</span> ("8") e <span class="mono">input2.value</span> ("10"), ¿qué ocurre si hacemos <span class="mono">input1.value + input2.value</span>?
+        </p>
+      </div>
+
+      <div class="quiz-container">
+        <div class="quiz-question">
+          ¿Cuál es el resultado exacto y cómo se resuelve este bug clásico de JavaScript?
+        </div>
+
+        <div class="quiz-options">
+          <button class="quiz-btn" onclick="checkQuiz(this, false, 'q3', 'Incorrecto. JavaScript no suma automáticamente los valores de input.value porque son tratados como strings.')">
+            <span>A.</span> Da como resultado el número 18 automáticamente
+          </button>
+
+          <button class="quiz-btn" onclick="checkQuiz(this, false, 'q3', 'Incorrecto. No lanza NaN en el operador suma (+) porque concatena strings; da NaN en resta o multiplicación.')">
+            <span>B.</span> Lanza un error crítico NaN (Not a Number) en consola
+          </button>
+
+          <button class="quiz-btn" onclick="checkQuiz(this, false, 'q3', 'Incorrecto. Los navegadores no bloquean la ejecución, simplemente producen un resultado erróneo.')">
+            <span>C.</span> Se bloquea la pestaña del navegador inmediatamente
+          </button>
+
+          <button class="quiz-btn" onclick="checkQuiz(this, true, 'q3', '¡Correcto! Concatena el texto generando &quot;810&quot;. Para solucionarlo se debe convertir a número usando parseFloat() o Number().')">
+            <span>D.</span> Concatena como texto dando "810"; se arregla con <code>parseFloat()</code>
+          </button>
+        </div>
+
+        <div id="feedback-q3" class="quiz-feedback"></div>
+      </div>
+
+      <div class="bottombar">
+        <span>EVALUACIÓN FORMATIVA INTERACTIVA</span>
+        <div class="bottom-controls">
+          <span class="ctrl-pill" onclick="prevSlide()">[←]</span>
+          <span class="ctrl-pill" onclick="nextSlide()">[→]</span>
+        </div>
+        <span class="slide-num">SLIDE 14 / 18</span>
+      </div>
+    </section>
+
+    <!-- ==================== SLIDE 15: FLUJO GIT ==================== -->
+    <section class="slide" data-slide="15">
+      <div class="topbar">
+        <div class="topbar-left">
+          <span class="pill pill-cyan"><i data-lucide="git-pull-request" style="width: 16px; height: 16px;"></i> GUÍA PASO A PASO</span>
+          <span>GIT PARA PRINCIPIANTES</span>
+        </div>
+        <div>¿CÓMO EMPEZAR TU TALLER?</div>
+      </div>
+
+      <div style="margin-top: 10px;">
+        <h2 class="font-display title-xl">TU FLUJO DE TRABAJO: FORK & RAMAS</h2>
+        <p style="font-size: 24px; color: var(--ink-2); margin-bottom: 20px;">
+          Crea tu propia copia en GitHub (Fork), clónala en tu máquina y trabaja en tu rama personal:
+        </p>
+      </div>
+
+      <div class="grid-3">
+        <div class="card card-yellow">
+          <div style="display: flex; align-items: center; margin-bottom: 12px;">
+            <div class="step-circle">1</div>
+            <h3 class="font-display" style="font-size: 20px;">HACER FORK</h3>
+          </div>
+          <p style="font-size: 16px; margin-bottom: 8px; font-weight: 600;">En el repo de la UETS, haz clic en el botón <b>"Fork"</b> (arriba derecha) para generar tu copia:</p>
+          <div class="code-box" style="font-size: 12.5px;">
+github.com/UETS-Programacion-Movil/
+  01-diagnostica
+➔ Clic en botón "Create Fork"
+          </div>
+        </div>
+
+        <div class="card card-pink">
+          <div style="display: flex; align-items: center; margin-bottom: 12px;">
+            <div class="step-circle">2</div>
+            <h3 class="font-display" style="font-size: 20px;">CLONAR TU FORK</h3>
+          </div>
+          <p style="font-size: 16px; margin-bottom: 8px; font-weight: 600;">Clona <b>tu</b> repositorio personal y entra a la carpeta en VS Code:</p>
+          <div class="code-box" style="font-size: 12.5px;">
+git clone https://github.com/TU-USUARIO/01-diagnostica.git
+cd 01-diagnostica
+pnpm install
+          </div>
+        </div>
+
+        <div class="card card-green">
+          <div style="display: flex; align-items: center; margin-bottom: 12px;">
+            <div class="step-circle">3</div>
+            <h3 class="font-display" style="font-size: 20px;">CREAR TU RAMA</h3>
+          </div>
+          <p style="font-size: 16px; margin-bottom: 8px; font-weight: 600;">Crea tu rama de trabajo con tu nombre y apellido:</p>
+          <div class="code-box" style="font-size: 12.5px;">
+git checkout -b entrega/tu-nombre-apellido
+          </div>
+        </div>
+      </div>
+
+      <div class="bottombar">
+        <span>CONTROL DE VERSIONES BÁSICO (PASO 1 A 3)</span>
+        <div class="bottom-controls">
+          <span class="ctrl-pill" onclick="prevSlide()">[←]</span>
+          <span class="ctrl-pill" onclick="nextSlide()">[→]</span>
+        </div>
+        <span class="slide-num">SLIDE 15 / 18</span>
+      </div>
+    </section>
+
+    <!-- ==================== SLIDE 16: PULL REQUEST & COMMITS ==================== -->
+    <section class="slide" data-slide="16">
+      <div class="topbar">
+        <div class="topbar-left">
+          <span class="pill pill-orange"><i data-lucide="check-circle" style="width: 16px; height: 16px;"></i> BUENAS PRÁCTICAS</span>
+          <span>PULL REQUEST & CONVENTIONAL COMMITS</span>
+        </div>
+        <div>CALIFICACIÓN AUTOMÁTICA</div>
+      </div>
+
+      <div style="margin-top: 10px;">
+        <h2 class="font-display title-xl">COMMITS SEMÁNTICOS & PULL REQUEST</h2>
+        <p style="font-size: 24px; color: var(--ink-2); margin-bottom: 18px;">
+          Haz commits claros por cada bloque completado y abre tu Pull Request hacia el repo principal:
+        </p>
+      </div>
+
+      <div class="grid-2">
+        <div class="card card-green">
+          <div class="mono" style="font-size: 18px; font-weight: 800; color: var(--green-dark); margin-bottom: 8px;">
+            ✅ COMMITS CORRECTOS (+0.50 PTS)
+          </div>
+          <div class="code-box" style="font-size: 13.5px; line-height: 1.35; margin-bottom: 10px;">
+git add .
+git commit -m "feat(bloque-a): resolver ejercicios de java y poo"
+git commit -m "style(bloque-b): maquetar html semantico y flexbox"
+git commit -m "feat(bloque-c): agregar interactividad dom"
+git commit -m "fix(bloque-d): depurar triada y reporte de bugs"
+git push origin entrega/tu-nombre-apellido
+          </div>
+          <p style="font-size: 15px; font-weight: 600;">
+            👉 Cada commit debe usar prefijos estándar (<span class="mono">feat:</span>, <span class="mono">fix:</span>, <span class="mono">style:</span>, <span class="mono">docs:</span>).
+          </p>
+        </div>
+
+        <div class="card card-pink">
+          <div class="mono" style="font-size: 18px; font-weight: 800; color: #991B1B; margin-bottom: 8px;">
+            ❌ COMMITS PROHIBIDOS (0 PTS)
+          </div>
+          <ul style="font-size: 16px; line-height: 1.5; margin-left: 20px; font-family: 'JetBrains Mono', monospace; font-weight: 700; margin-bottom: 12px;">
+            <li>"subiendo tarea"</li>
+            <li>"commit 1" / "commit final"</li>
+            <li>"cambios" / "arreglos"</li>
+            <li>"ya está profe"</li>
+            <li>"asd" o "."</li>
+          </ul>
+          <div class="card card-cream" style="padding: 10px 14px; font-size: 14px; font-weight: 600;">
+            <b>En GitHub Web:</b> Clic en <b>"Contribute" ➔ "Open pull request"</b>. Pega el enlace de tu video en la descripción.
+          </div>
+        </div>
+      </div>
+
+      <div class="bottombar">
+        <span>ESTÁNDARES DE CALIDAD PROFESIONAL</span>
+        <div class="bottom-controls">
+          <span class="ctrl-pill" onclick="prevSlide()">[←]</span>
+          <span class="ctrl-pill" onclick="nextSlide()">[→]</span>
+        </div>
+        <span class="slide-num">SLIDE 16 / 18</span>
+      </div>
+    </section>
+
+    <!-- ==================== SLIDE 17: SCREENCAST & RÚBRICA ==================== -->
+    <section class="slide" data-slide="17">
+      <div class="topbar">
+        <div class="topbar-left">
+          <span class="pill pill-orange"><i data-lucide="video" style="width: 16px; height: 16px;"></i> BLOQUE B (50%)</span>
+          <span>VIDEO SCREENCAST & RÚBRICA DUAL</span>
+        </div>
+        <div>DEFENSA TÉCNICA ORAL (5.0 PTS)</div>
+      </div>
+
+      <div style="margin-top: 10px;">
+        <h2 class="font-display title-xl">ESTRUCTURA DEL VIDEO (5 A 6 MINUTOS)</h2>
+        <p style="font-size: 24px; color: var(--ink-2); margin-bottom: 18px;">
+          Sustenta tus decisiones técnicas con solvencia, cámara activa y terminal en vivo:
+        </p>
+      </div>
+
+      <div class="grid-2">
+        <div class="card card-yellow">
+          <h3 class="font-display" style="font-size: 22px; margin-bottom: 10px;">🎥 GUION SUGERIDO DEL VIDEO:</h3>
+          <ol style="font-size: 16px; line-height: 1.5; margin-left: 20px; font-weight: 600;">
+            <li><b>Minuto 0:00 - 0:45:</b> Presentación personal en cámara (nombre, paralelo E1/E2 y curso).</li>
+            <li><b>Minuto 0:45 - 2:00:</b> Explicación de la solución en Java (Bloque A) y la maquetación semántica (Bloque B).</li>
+            <li><b>Minuto 2:00 - 3:30:</b> Explicación de los eventos en JavaScript (Bloque C) y los bugs corregidos en la calculadora (Bloque D).</li>
+            <li><b>Minuto 3:30 - 4:45:</b> Ejecución en vivo en la terminal de <span class="mono">pnpm run test:all</span> mostrando los 4 retos aprobados.</li>
+            <li><b>Minuto 4:45 - 5:30:</b> Demostración en el navegador con la consola F12 limpia sin errores en rojo.</li>
+          </ol>
+        </div>
+
+        <div class="card card-cream">
+          <h3 class="font-display" style="font-size: 22px; margin-bottom: 10px;">📊 DESGLOSE DE RÚBRICA (10.0 PTS):</h3>
+          <ul style="font-size: 16px; line-height: 1.5; margin-left: 20px; font-weight: 600;">
+            <li><b>Bloque A (GitHub 5.0 pts):</b>
+              <ul style="margin-left: 18px; margin-top: 4px;">
+                <li>4.0 pts: 4 retos pasando tests (<span class="mono">test:all</span>).</li>
+                <li>0.5 pts: Tipos limpios (<span class="mono">pnpm run check</span>).</li>
+                <li>0.5 pts: Conventional Commits y PR en orden.</li>
+              </ul>
+            </li>
+            <li style="margin-top: 8px;"><b>Bloque B (Video Screencast 5.0 pts):</b>
+              <ul style="margin-left: 18px; margin-top: 4px;">
+                <li>2.5 pts: Claridad en la explicación conceptual de los 4 bloques.</li>
+                <li>1.5 pts: Demostración en vivo en terminal y consola F12.</li>
+                <li>1.0 pt: Calidad audiovisual y enlace en la descripción del PR.</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bottombar">
+        <span>DEFENSA ORAL EN VIDEO SCREENCAST</span>
+        <div class="bottom-controls">
+          <span class="ctrl-pill" onclick="prevSlide()">[←]</span>
+          <span class="ctrl-pill" onclick="nextSlide()">[→]</span>
+        </div>
+        <span class="slide-num">SLIDE 17 / 18</span>
+      </div>
+    </section>
+
+    <!-- ==================== SLIDE 18: CIERRE Y ACCIÓN ==================== -->
+    <section class="slide" data-slide="18" style="background-color: var(--yellow); color: var(--ink);">
+      <div class="topbar" style="color: var(--ink);">
+        <div class="topbar-left">
+          <span class="pill" style="background: #FFF; color: var(--ink);"><i data-lucide="zap" style="width: 16px; height: 16px;"></i> ¡A CODIFICAR!</span>
+          <span>PROGRAMACIÓN MÓVIL · UETS</span>
+        </div>
+        <div>AÑO LECTIVO 2026–2027</div>
+      </div>
+
+      <div style="margin-top: 35px;">
+        <div class="pill" style="background: #0A0A0A; color: #FFF; display: inline-flex; margin-bottom: 16px;">
+          ACTIVIDAD PRÁCTICA 1
+        </div>
+        <h1 class="font-display" style="font-size: 82px; line-height: 0.95; margin-bottom: 18px; color: var(--ink); text-shadow: 3px 3px 0 rgba(0,0,0,0.15);">
+          SUPERA LA DIAGNÓSTICA.<br>CREA TU PULL REQUEST.
+        </h1>
+        <p style="font-size: 25px; line-height: 1.4; max-width: 1300px; color: #262626; font-weight: 600;">
+          Clona tu fork, crea tu rama <code>entrega/tu-nombre</code>, completa los 4 bloques, verifica los tests y entrega tu Screencast para recibir la calificación inmediata del Bot.
+        </p>
+      </div>
+
+      <div class="card" style="background: #FFFFFF; color: var(--ink); padding: 20px 28px; display: flex; justify-content: space-between; align-items: center; margin-top: 24px;">
+        <div>
+          <div class="mono" style="font-size: 16px; font-weight: 700; color: var(--green-dark);">COMANDOS DE INICIO RÁPIDO:</div>
+          <div class="mono" style="font-size: 20px; font-weight: 700; margin-top: 4px;">
+            git clone https://github.com/UETS-Programacion-Movil/01-diagnostica.git
+          </div>
+        </div>
+        <div class="pill pill-orange" style="font-size: 18px; padding: 10px 18px;">
+          pnpm install &amp;&amp; pnpm run test:all
+        </div>
+      </div>
+
+      <div class="bottombar" style="color: var(--ink); border-top-color: rgba(10,10,10,0.3);">
+        <span>UNIDAD EDUCATIVA TÉCNICO SALESIANO · PROF. MILTON VELÁSQUEZ</span>
+        <div class="bottom-controls">
+          <span class="ctrl-pill" onclick="prevSlide()">[←]</span>
+          <span class="ctrl-pill" onclick="showSlide(0)">[Inicio]</span>
+          <span class="ctrl-pill" onclick="toggleFullscreen()">[F] Fullscreen</span>
+        </div>
+        <span class="slide-num">SLIDE 18 / 18</span>
+      </div>
+    </section>
+
+  </div>
+
+  <script>
+    /* ==========================================================================
+       STAGE SCALING & PRESENTATION CONTROLLER (1920x1080)
+       ========================================================================== */
+    const stage = document.getElementById('stage-container');
+    const slides = document.querySelectorAll('.slide');
+    const progressBar = document.getElementById('progress-bar');
+    let currentSlide = 0;
+    const totalSlides = slides.length;
+
+    // Actualizar los números de slide dinámicamente
+    document.querySelectorAll('.slide-num').forEach((el, idx) => {
+      const num = (idx + 1).toString().padStart(2, '0');
+      const total = totalSlides.toString().padStart(2, '0');
+      el.textContent = `SLIDE ${num} / ${total}`;
+    });
+
+    function updateIcons() {
+      if (window.lucide) {
+        lucide.createIcons();
+      }
+    }
+
+    // Fixed 1920x1080 Aspect-Ratio Fit
+    function resizeStage() {
+      const targetW = 1920;
+      const targetH = 1080;
+      const windowW = window.innerWidth;
+      const windowH = window.innerHeight;
+
+      const scale = Math.min(windowW / targetW, windowH / targetH);
+      stage.style.transform = `translate(-50%, -50%) scale(${scale})`;
+    }
+
+    window.addEventListener('resize', resizeStage);
+    window.addEventListener('load', () => {
+      resizeStage();
+      updateIcons();
+    });
+    resizeStage();
+
+    // Slide Navigation
+    function showSlide(index) {
+      if (index < 0) index = 0;
+      if (index >= totalSlides) index = totalSlides - 1;
+
+      slides.forEach((s, idx) => {
+        if (idx === index) {
+          s.classList.add('active');
+        } else {
+          s.classList.remove('active');
+        }
+      });
+
+      currentSlide = index;
+      const progressPercent = ((currentSlide + 1) / totalSlides) * 100;
+      progressBar.style.width = progressPercent + '%';
+      updateIcons();
+    }
+
+    function nextSlide() {
+      showSlide(currentSlide + 1);
+    }
+
+    function prevSlide() {
+      showSlide(currentSlide - 1);
+    }
+
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(() => {});
+      } else {
+        if (document.exitFullscreen) document.exitFullscreen().catch(() => {});
+      }
+    }
+
+    // Keyboard Shortcuts
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+        e.preventDefault();
+        nextSlide();
+      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        e.preventDefault();
+        prevSlide();
+      } else if (e.key === 'f' || e.key === 'F') {
+        toggleFullscreen();
+      } else if (e.key === 'Home') {
+        showSlide(0);
+      } else if (e.key === 'End') {
+        showSlide(totalSlides - 1);
+      }
+    });
+
+    // Quiz Check Interactive Helper
+    function checkQuiz(btn, isCorrect, quizId, explanation) {
+      const parent = btn.closest('.quiz-container');
+      const buttons = parent.querySelectorAll('.quiz-btn');
+      const feedback = document.getElementById('feedback-' + quizId);
+
+      buttons.forEach(b => {
+        b.classList.remove('correct', 'incorrect');
+      });
+
+      if (isCorrect) {
+        btn.classList.add('correct');
+        feedback.style.display = 'block';
+        feedback.style.background = '#D1FAE5';
+        feedback.style.borderColor = '#047857';
+        feedback.innerHTML = '<b>✅ ¡EXCELENTE!</b> ' + explanation;
+      } else {
+        btn.classList.add('incorrect');
+        feedback.style.display = 'block';
+        feedback.style.background = '#FFE4E6';
+        feedback.style.borderColor = '#BE123C';
+        feedback.innerHTML = '<b>❌ INTÉNTALO DE NUEVO:</b> ' + explanation;
+      }
+      updateIcons();
+    }
+  </script>
+</body>
+</html>
+
+>>>>>>> 3f96c15cbb79881c4f69997e5aa98802ccbbeeb0
