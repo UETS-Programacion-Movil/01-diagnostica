@@ -12,21 +12,21 @@ function calcularPromedioNotas(a, b) {
 function procesarCalculo() {
   const input1 = document.querySelector("#nota1");
   // BUG JS: Selector incorrecto
-  const input2 = document.querySelector("#nota_inexistente");
+  const input2 = document.querySelector("#nota2");
   const cajaResultado = document.querySelector("#resultado");
 
   // BUG JS: no convierte a número
-  const val1 = input1.value;
-  const val2 = input2.value;
+  const val1 = Number(input1.value);
+  const val2 = Number(input2.value);
 
   const promedio = calcularPromedioNotas(val1, val2);
 
   // BUG JS: error de sintaxis al asignar textContent
-  cajaResultado.textContnt = "Promedio: " + promedio;
+  cajaResultado.textContent = "Promedio: " + promedio;
 }
 
 // BUG JS: Selector que no encuentra el botón
-const boton = document.querySelector(".btn-calcular");
+const boton = document.querySelector("#btn-calcular");
 if (boton) {
   boton.addEventListener("click", procesarCalculo);
 }

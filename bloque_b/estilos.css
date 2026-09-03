@@ -10,3 +10,44 @@
  */
 
 /* TODO: Escribe aquí tus reglas de estilos CSS */
+body {
+    font-family: Arial;
+    margin: 0;
+    background-color: black;
+}
+
+header {
+    padding: 20px;
+    color: white;
+    display: flex;
+    background-color: blue;
+    align-items: center;
+    flex-direction: column;
+}
+
+#contenido {
+    background-color: beige;
+    color: black;
+    margin: 20px;
+    padding: 30px;
+    text-align: center;
+}
+
+.texto {
+    color: blue;
+    font-size: 20px;
+}
+
+article {
+    background-color: aquamarine;
+    padding: 15px;
+    margin-top: 15px;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    background-color: black;
+    color: white;
+    padding: 15px;
+}
