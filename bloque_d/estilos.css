@@ -1,6 +1,6 @@
 /*
  * ============================================================================
- * 🎓 EVALUACIÓN DIAGNÓSTICA — BLOQUE D: ESTILOS CSS CON ERRORES
+ * 🎓 EVALUACIÓN DIAGNÓSTICA — BLOQUE D: ESTILOS CSS CORREGIDOS
  * ============================================================================
  */
 
@@ -13,9 +13,9 @@
 
 body {
   background-color: #F1F5F9;
-  /* BUG CSS: Propiedades inválidas o mal escritas */
-  display: flexer;
-  align-item: center;
+  /* FIX CSS: Propiedades flexbox corregidas */
+  display: flex;
+  align-items: center;
   padding: 20px;
 }
 
@@ -50,8 +50,8 @@ body {
   font-weight: bold;
   background-color: #FDE047;
   border: 2px solid #000000;
-  /* BUG CSS: valor inválido en cursor */
-  cursor: pointing-hand;
+  /* FIX CSS: Cursor corregido a pointer */
+  cursor: pointer;
   border-radius: 6px;
 }
 

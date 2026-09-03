@@ -10,3 +10,61 @@
  */
 
 /* TODO: Escribe aquí tus reglas de estilos CSS */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-familt: Arial, Helvetica, sans-serif;
+}
+
+.body {
+    background-color: #f4f6f9;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    main-height: 100vh;
+}
+
+.main-header{
+    background-color: #1e293b;
+    color: #ffffff;
+    padding: 2rem;
+    text-aling: center;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    gap: 1.5rem;
+    padding: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+    flex: 1;
+}
+
+.card {
+    background-color: #ffffff;
+    border: 2px solid #e3e8f0;
+    border-radius: 8px;
+    padding: 1.5rem;
+    flex: 1;
+}
+
+.card {
+    color: #0f172a;
+    margin-bottom: 0.75rem;
+}
+
+.tech-list {
+    list-style-type: square;
+    padding-left: 1.2rem;
+}
+
+
+.main-footer {
+    background-color: #0f172a;
+    color: #94a3b8;
+    text-align: center;
+    padding: 1rem;
+}
