@@ -36,3 +36,4 @@ btnSaludar.addEventListener("click", generarSaludo);
         inputNombre.value = "";
         mensajeResultado.textContent = "Esperando interacción...";
  });
+//Bloque c Finalizado
