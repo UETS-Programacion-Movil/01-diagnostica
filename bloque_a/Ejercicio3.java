@@ -6,7 +6,7 @@ public class Ejercicio3 {
 
         int edad = scanner.nextInt();
 
-        if (edad >= 18) {
+        if (edad>=18) {
             System.out.println("Mayor de edad");
         } else {
             System.out.println("Menor de edad");

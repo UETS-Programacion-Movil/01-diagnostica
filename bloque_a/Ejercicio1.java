@@ -1,8 +1,8 @@
 public class Ejercicio1 {
     public static void main(String[] args) {
-        int cant = 17;
-        double valor = 1.70;
-        String nombre = "Juan";
+        int cant = 12;
+        double valor = 1.25;
+        String nombre = "Leche";
         boolean stock = true;
 
         System.out.println(cant);
