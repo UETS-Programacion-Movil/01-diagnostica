@@ -1,0 +1,66 @@
+/*
+ * ============================================================================
+ * 🎓 EVALUACIÓN DIAGNÓSTICA — BLOQUE D: ESTILOS CSS CON ERRORES
+ * ============================================================================
+ */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background-color: #F1F5F9;
+  /* BUG CSS: Propiedades inválidas o mal escritas */
+  display: flexer;
+  align-item: center;
+  padding: 20px;
+}
+
+.contenedor {
+  background: #FFFFFF;
+  border: 3px solid #000000;
+  box-shadow: 6px 6px 0px #000000;
+  border-radius: 10px;
+  padding: 30px;
+  width: 100%;
+  max-width: 450px;
+  margin: 0 auto;
+}
+
+.campo {
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.campo input {
+  padding: 10px;
+  border: 2px solid #000000;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+#btn-calcular {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: #FDE047;
+  border: 2px solid #000000;
+  /* BUG CSS: valor inválido en cursor */
+  cursor: pointing-hand;
+  border-radius: 6px;
+}
+
+.caja-resultado {
+  margin-top: 20px;
+  padding: 14px;
+  border: 2px solid #000000;
+  border-radius: 6px;
+  background-color: #E2E8F0;
+  text-align: center;
+  font-weight: bold;
+}
