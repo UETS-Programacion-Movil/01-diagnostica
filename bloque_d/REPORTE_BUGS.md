@@ -1,6 +1,6 @@
 # 🐛 Reporte de Bugs Encontrados y Corregidos (Bloque D)
 **Estudiante:** [Anthony Espinosa]  
-**Paralelo:** [E2] | **Fecha:** [DD/MM/2026]  
+**Paralelo:** [E2] | **Fecha:** [03/09/2026]  
 
 ---
 
@@ -20,8 +20,8 @@
 
 ## 3. 🔍 Bug de JavaScript Encontrado (D3)
 - **¿Qué fallaba?:** <!-- La calculadora no encontraba la nota 2 ni el botón y el promedio no se calculaba correctamente -->
-- **Causa Raíz:** <!-- TODO: abía selectores incorrectos, los valores no se convertían a números y textContent estaba escrito incorrectamente -->
-- **Solución Aplicada:** <!-- TODO: Cambié el selector a nota2, usé parseFloat(), corregí el cálculo del promedio, cambié textContnt por textContent y usé btn-calcular -->
+- **Causa Raíz:** <!--  Había selectores incorrectos, los valores no se convertían a números y textContent estaba escrito incorrectamente -->
+- **Solución Aplicada:** <!-- Cambié el selector a nota2, usé parseFloat(), corregí el cálculo del promedio, cambié textContnt por textContent y usé btn-calcular -->
 
 ---
 
