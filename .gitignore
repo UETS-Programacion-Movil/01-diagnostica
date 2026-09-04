@@ -1,16 +1,4 @@
-# Dependencias
 node_modules
 dist
-
-# Artefactos del Sistema Operativo
 .DS_Store
-Thumbs.db
 *.log
-
-# Artefactos de Agentes y Editores
-*.metadata.json
-.eval_sandbox
-.vscode
-.idea
-*.suo
-*.user

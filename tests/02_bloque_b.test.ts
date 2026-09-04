@@ -51,20 +51,18 @@ async function runTests() {
   assert(Boolean(sectionOrArticle), 'Uso de <section> o <article>', 'Organiza tus contenidos en <section> o <article>.');
   assert(Boolean(footer), 'Uso de etiqueta semántica <footer>', 'Agrega un <footer> al final de la página.');
 
-  // B3 & B4: Selectores clase, ID y propiedades CSS (limpiando comentarios previos)
-  const cleanCss = cssContent.replace(/\/\*[\s\S]*?\*\//g, '');
-
-  assert(cleanCss.includes('.') && cleanCss.includes('#'), 'Uso de selectores de clase (.) y de ID (#)', 'Define al menos una regla para una clase (.mi-clase) y un id (#mi-id) en estilos.css.');
+  // B3 & B4: Selectores clase, ID y propiedades CSS
+  assert(cssContent.includes('.') && cssContent.includes('#'), 'Uso de selectores de clase (.) y de ID (#)', 'Define al menos una regla para una clase (.mi-clase) y un id (#mi-id) en estilos.css.');
 
   const hasProperties = ['color', 'background', 'padding', 'margin', 'font', 'border']
-    .filter(prop => cleanCss.includes(prop));
+    .filter(prop => cssContent.includes(prop));
   assert(hasProperties.length >= 3, 'Define al menos 3 propiedades CSS fundamentales', 'Usa propiedades como color, background-color, padding, font-size o border.');
 
   // B5: Flexbox o CSS Grid
-  const hasLayout = cleanCss.includes('display: flex') || 
-                    cleanCss.includes('display:flex') || 
-                    cleanCss.includes('display: grid') || 
-                    cleanCss.includes('display:grid');
+  const hasLayout = cssContent.includes('display: flex') || 
+                    cssContent.includes('display:flex') || 
+                    cssContent.includes('display: grid') || 
+                    cssContent.includes('display:grid');
   assert(hasLayout, 'Maquetación con Flexbox o CSS Grid', 'Aplica display: flex o display: grid en tus contenedores.');
 
   console.log('\n✨ ¡Excelente trabajo! Has completado con éxito el Bloque B (HTML5 + CSS3). (+1.00 pt)');

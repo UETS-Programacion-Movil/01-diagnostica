@@ -3,9 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Calculadora de Notas UETS — Bloque D (¡CONTIENE ERRORES!)</title>
-  <!-- BUG CSS: Vinculación rota o nombre incorrecto -->
-  <link rel="stylesheet" href="estilos-rotos.css">
+  <title>Calculadora de Notas UETS — Bloque D</title>
+  <link rel="stylesheet" href="estilos.css">
 </head>
 <body>
 
@@ -13,7 +12,7 @@
     <header class="header">
       <h1>Calculadora de Notas UETS</h1>
       <p>Ingresa tus notas de aporte y examen:</p>
-    <!-- BUG HTML: Etiqueta header no cerrada o mal estructurada -->
+    </header>
 
     <section class="formulario">
       <div class="campo">
@@ -23,12 +22,10 @@
 
       <div class="campo">
         <label for="nota2">Examen Quimestral (sobre 10):</label>
-        <!-- BUG HTML: id faltante o incorrecto -->
-        <input type="number" name="nota_quimestral" min="0" max="10" step="0.1" placeholder="Ej: 8.5">
+        <input type="number" id="nota2" min="0" max="10" step="0.1" placeholder="Ej: 8.5">
       </div>
 
-      <!-- BUG HTML: Botón mal etiquetado o sin ID -->
-      <button>Calcular Promedio</button>
+      <button id="btn-calcular">Calcular Promedio</button>
     </section>
 
     <div id="resultado" class="caja-resultado">

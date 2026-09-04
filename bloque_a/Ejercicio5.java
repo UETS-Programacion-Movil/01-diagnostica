@@ -1,12 +1,32 @@
 public class Ejercicio5 {
 
-    // TODO: Define la función estática calcularPromedio(double a, double b)
+    public static double calcularPromedio(double a, double b) {
+        return (a + b) / 2;
+    }
 
     public static void main(String[] args) {
-        // TODO: Prueba la función calcularPromedio
+        double promedio = calcularPromedio(8.5, 9.5);
+        System.out.println(promedio);
 
-        // TODO: Instancia la clase Estudiante y llama a su método mostrarFicha()
+        Estudiante estudiante = new Estudiante("Juan", 17, "Informática");
+        estudiante.mostrarFicha();
     }
 }
 
-// TODO: Crea aquí la clase Estudiante con sus atributos, constructor y métodos
+class Estudiante {
+    String nombre;
+    int edad;
+    String carrera;
+
+    public Estudiante(String nombre, int edad, String carrera) {
+        this.nombre = nombre;
+        this.edad = edad;
+        this.carrera = carrera;
+    }
+
+    public void mostrarFicha() {
+        System.out.println(nombre);
+        System.out.println(edad);
+        System.out.println(carrera);
+    }
+}
